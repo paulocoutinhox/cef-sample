@@ -1,0 +1,11 @@
+.DS_Store
+Thumbs.db
+.vscode
+/build
+/temp
+*.pyc
+__pycache__
+*.txt.user
+node_modules
+package-lock.json
+/*.dmg

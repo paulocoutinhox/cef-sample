@@ -1,0 +1,101 @@
+name: Windows
+
+on: [push]
+
+jobs:
+  build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {
+              name: "Windows 32",
+              os: "windows-latest",
+              target: "windows",
+              cef_platform: "windows32",
+              vs_arch: "Win32",
+              msvc_arch: "x86",
+              project_arch: "x86",
+            }
+          - {
+              name: "Windows 64",
+              os: "windows-latest",
+              target: "windows",
+              cef_platform: "windows64",
+              vs_arch: "x64",
+              msvc_arch: "x64",
+              project_arch: "x64",
+            }
+          - {
+              name: "Windows ARM 64",
+              os: "windows-latest",
+              target: "windows",
+              cef_platform: "windowsarm64",
+              vs_arch: "ARM64",
+              msvc_arch: "amd64_arm64",
+              project_arch: "arm64",
+            }
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.config.msvc_arch }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+
+      - name: Upgrade PIP
+        run: python -m pip install --upgrade pip setuptools wheel
+
+      - name: Display Python version
+        run: python --version
+
+      - name: Display PIP version
+        run: pip --version
+
+      - name: Python requirements
+        run: pip install -r requirements.txt
+
+      - name: Install CMake
+        uses: jwlawson/actions-setup-cmake@v1.8
+        with:
+          cmake-version: "3.20.0"
+
+      - name: Build
+        run: |
+          cmake -E make_directory build
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCEF_PLATFORM=${{ matrix.config.cef_platform }} -A ${{ matrix.config.vs_arch }} -DPROJECT_ARCH=${{ matrix.config.project_arch }}
+          cmake --build build --target MyApp --config Release -v
+
+      - name: Pack
+        run: python -m zipfile -c ../${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip Release
+        working-directory: build
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-${{ matrix.config.target }}-${{ matrix.config.cef_platform }}
+          path: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip
+
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.2
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Release
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip
+          asset_name: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip
+          asset_content_type: application/zip
