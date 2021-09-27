@@ -29,7 +29,7 @@ void BrowserUtil::create(CefRefPtr<CefClient> client, const CefString &startupUR
     if (useViews)
     {
         // create the BrowserView
-        CefRefPtr<CefBrowserView> browserView = CefBrowserView::CreateBrowserView(client, startupURL, settings, NULL, NULL, NULL);
+        CefRefPtr<CefBrowserView> browserView = CefBrowserView::CreateBrowserView(client, startupURL, settings, nullptr, nullptr, nullptr);
 
         // create the window because it will show itself after creation
         CefWindow::CreateTopLevelWindow(new BrowserWindowDelegate(browserView));
@@ -41,11 +41,11 @@ void BrowserUtil::create(CefRefPtr<CefClient> client, const CefString &startupUR
 
 #if defined(OS_WIN)
         // on Windows we need to specify certain flags that will be passed to CreateWindowEx()
-        windowInfo.SetAsPopup(NULL, APP_NAME);
+        windowInfo.SetAsPopup(nullptr, APP_NAME);
 #endif
 
         // create the browser window
-        CefBrowserHost::CreateBrowser(windowInfo, client, startupURL, settings, NULL, NULL);
+        CefBrowserHost::CreateBrowser(windowInfo, client, startupURL, settings, nullptr, nullptr);
     }
 }
 

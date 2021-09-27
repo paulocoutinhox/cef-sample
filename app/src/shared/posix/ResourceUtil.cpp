@@ -64,7 +64,7 @@ CefRefPtr<CefStreamReader> ResourceUtil::getResourceReader(const std::string &re
 
     if (!getResourceDir(path))
     {
-        return NULL;
+        return nullptr;
     }
 
     path.append("/");
@@ -72,7 +72,7 @@ CefRefPtr<CefStreamReader> ResourceUtil::getResourceReader(const std::string &re
 
     if (!fileExists(path.c_str()))
     {
-        return NULL;
+        return nullptr;
     }
 
     return CefStreamReader::CreateForFile(path);

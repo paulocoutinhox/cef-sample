@@ -25,11 +25,11 @@ public:
     RequestClient(CefRefPtr<CefMessageRouterBrowserSide::Callback> browserCallback, const RequestCallback &requestCallback);
     virtual ~RequestClient();
 
-    void OnRequestComplete(CefRefPtr<CefURLRequest> request) OVERRIDE;
-    void OnUploadProgress(CefRefPtr<CefURLRequest> request, int64 current, int64 total) OVERRIDE;
-    void OnDownloadProgress(CefRefPtr<CefURLRequest> request, int64 current, int64 total) OVERRIDE;
-    void OnDownloadData(CefRefPtr<CefURLRequest> request, const void *data, size_t dataLength) OVERRIDE;
-    bool GetAuthCredentials(bool isProxy, const CefString &host, int port, const CefString &realm, const CefString &scheme, CefRefPtr<CefAuthCallback> callback) OVERRIDE;
+    void OnRequestComplete(CefRefPtr<CefURLRequest> request) override;
+    void OnUploadProgress(CefRefPtr<CefURLRequest> request, int64 current, int64 total) override;
+    void OnDownloadProgress(CefRefPtr<CefURLRequest> request, int64 current, int64 total) override;
+    void OnDownloadData(CefRefPtr<CefURLRequest> request, const void *data, size_t dataLength) override;
+    bool GetAuthCredentials(bool isProxy, const CefString &host, int port, const CefString &realm, const CefString &scheme, CefRefPtr<CefAuthCallback> callback) override;
 
     void detach();
     const std::string &getDownloadData();

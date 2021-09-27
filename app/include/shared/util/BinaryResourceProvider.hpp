@@ -18,7 +18,7 @@ public:
         DCHECK(!rootURL.empty());
     }
 
-    bool OnRequest(scoped_refptr<CefResourceManager::Request> request) OVERRIDE;
+    bool OnRequest(scoped_refptr<CefResourceManager::Request> request) override;
 
 private:
     std::string rootURL;

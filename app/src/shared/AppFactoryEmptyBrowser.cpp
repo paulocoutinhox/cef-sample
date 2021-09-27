@@ -5,7 +5,7 @@ namespace shared
 
 CefRefPtr<CefApp> AppFactory::createBrowserProcessApp()
 {
-    return NULL;
+    return nullptr;
 }
 
 } // namespace shared

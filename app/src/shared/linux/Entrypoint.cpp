@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
     // CEF applications have multiple sub-processes (render, plugin, GPU, etc) that share the same executable.
     // This function checks the command-line and, if this is a sub-process, executes the appropriate logic.
-    int exitCode = CefExecuteProcess(mainArgs, app, NULL);
+    int exitCode = CefExecuteProcess(mainArgs, app, nullptr);
 
     if (exitCode >= 0)
     {
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 
     // Initialize CEF for the browser process.
     // The first browser instance will be created in CefBrowserProcessHandler::OnContextInitialized() after CEF has been initialized.
-    CefInitialize(mainArgs, settings, app, NULL);
+    CefInitialize(mainArgs, settings, app, nullptr);
 
     // Run the CEF message loop.
     // This will block until CefQuitMessageLoop() is called.

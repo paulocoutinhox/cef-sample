@@ -2,6 +2,8 @@
 #include "main/net/RequestClient.hpp"
 #include "shared/AppConfig.hpp"
 
+#include <algorithm>
+
 namespace app
 {
 namespace binding
