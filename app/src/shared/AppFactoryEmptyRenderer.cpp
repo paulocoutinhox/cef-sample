@@ -5,7 +5,7 @@ namespace shared
 
 CefRefPtr<CefApp> AppFactory::createRendererProcessApp()
 {
-    return NULL;
+    return nullptr;
 }
 
 } // namespace shared

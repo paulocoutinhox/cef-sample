@@ -6,7 +6,7 @@
 namespace shared
 {
 
-ClientManager *ClientManager::instance = NULL;
+ClientManager *ClientManager::instance = nullptr;
 
 ClientManager::ClientManager() : isClosingInternal(false)
 {
@@ -18,7 +18,7 @@ ClientManager::~ClientManager()
     DCHECK(threadChecker.CalledOnValidThread());
     DCHECK(browserList.empty());
 
-    instance = NULL;
+    instance = nullptr;
 }
 
 ClientManager *ClientManager::getInstance()

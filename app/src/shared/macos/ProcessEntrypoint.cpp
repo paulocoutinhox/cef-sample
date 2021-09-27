@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
     }
 
     // execute the sub-process
-    return CefExecuteProcess(mainArgs, app, NULL);
+    return CefExecuteProcess(mainArgs, app, nullptr);
 }
 
 } // namespace shared

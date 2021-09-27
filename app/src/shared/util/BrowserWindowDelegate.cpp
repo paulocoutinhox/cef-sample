@@ -18,7 +18,7 @@ void BrowserWindowDelegate::OnWindowCreated(CefRefPtr<CefWindow> window)
 
 void BrowserWindowDelegate::OnWindowDestroyed(CefRefPtr<CefWindow> window)
 {
-    browserView = NULL;
+    browserView = nullptr;
 }
 
 bool BrowserWindowDelegate::CanClose(CefRefPtr<CefWindow> window)

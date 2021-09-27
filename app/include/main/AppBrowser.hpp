@@ -11,10 +11,10 @@ class BrowserApp : public CefApp, public CefBrowserProcessHandler
 public:
     BrowserApp() {}
 
-    CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE;
+    CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override;
 
-    void OnBeforeCommandLineProcessing(const CefString &process_type, CefRefPtr<CefCommandLine> command_line) OVERRIDE;
-    void OnContextInitialized() OVERRIDE;
+    void OnBeforeCommandLineProcessing(const CefString &process_type, CefRefPtr<CefCommandLine> command_line) override;
+    void OnContextInitialized() override;
 
     CefRefPtr<AppClient> getAppClient();
 

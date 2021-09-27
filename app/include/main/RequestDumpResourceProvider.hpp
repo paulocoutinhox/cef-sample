@@ -12,7 +12,7 @@ class RequestDumpResourceProvider : public CefResourceManager::Provider
 public:
     RequestDumpResourceProvider(const std::string &url);
 
-    bool OnRequest(scoped_refptr<CefResourceManager::Request> request) OVERRIDE;
+    bool OnRequest(scoped_refptr<CefResourceManager::Request> request) override;
     std::string dumpRequestContents(CefRefPtr<CefRequest> request);
 
 private:

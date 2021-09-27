@@ -18,7 +18,7 @@ public:
     virtual ~AppBinding() {}
 
     // called due to cefQuery execution
-    virtual bool OnQuery(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int64 queryId, const CefString &request, bool persistent, CefRefPtr<Callback> callback) OVERRIDE;
+    virtual bool OnQuery(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int64 queryId, const CefString &request, bool persistent, CefRefPtr<Callback> callback) override;
 
     // called on AppClient
     static void init(CefRefPtr<CefMessageRouterBrowserSide> router);

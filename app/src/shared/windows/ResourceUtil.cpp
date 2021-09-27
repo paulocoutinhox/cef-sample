@@ -21,7 +21,7 @@ namespace util
 bool ResourceUtil::getResourceDir(std::string &dir)
 {
     TCHAR buffer[MAX_PATH];
-    GetModuleFileName(NULL, buffer, MAX_PATH);
+    GetModuleFileName(nullptr, buffer, MAX_PATH);
     CT2CA pszPath(buffer);
 
     std::string path(pszPath);
@@ -62,7 +62,7 @@ int ResourceUtil::getResourceId(const std::string &resourcePath)
 
 bool ResourceUtil::loadBinaryResource(int binaryId, DWORD &dwSize, LPBYTE &pBytes)
 {
-    HINSTANCE hInst = GetModuleHandle(NULL);
+    HINSTANCE hInst = GetModuleHandle(nullptr);
     HRSRC hRes = FindResource(hInst, MAKEINTRESOURCE(binaryId), MAKEINTRESOURCE(256));
 
     if (hRes)
@@ -119,7 +119,7 @@ CefRefPtr<CefStreamReader> ResourceUtil::getResourceReader(const std::string &re
 
     if (resourceId == 0)
     {
-        return NULL;
+        return nullptr;
     }
 
     DWORD dwSize;
@@ -127,12 +127,12 @@ CefRefPtr<CefStreamReader> ResourceUtil::getResourceReader(const std::string &re
 
     if (ResourceUtil::loadBinaryResource(resourceId, dwSize, pBytes))
     {
-        return CefStreamReader::CreateForHandler(new CefByteReadHandler(pBytes, dwSize, NULL));
+        return CefStreamReader::CreateForHandler(new CefByteReadHandler(pBytes, dwSize, nullptr));
     }
 
     NOTREACHED(); // the resource should be found
 
-    return NULL;
+    return nullptr;
 }
 
 } // namespace util

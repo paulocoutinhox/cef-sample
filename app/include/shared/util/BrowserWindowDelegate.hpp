@@ -16,11 +16,11 @@ class BrowserWindowDelegate : public CefWindowDelegate
 public:
     explicit BrowserWindowDelegate(CefRefPtr<CefBrowserView> browserView) : browserView(browserView) {}
 
-    void OnWindowCreated(CefRefPtr<CefWindow> window) OVERRIDE;
-    void OnWindowDestroyed(CefRefPtr<CefWindow> window) OVERRIDE;
-    bool CanClose(CefRefPtr<CefWindow> window) OVERRIDE;
-    CefSize GetPreferredSize(CefRefPtr<CefView> view) OVERRIDE;
-    CefSize GetMinimumSize(CefRefPtr<CefView> view) OVERRIDE;
+    void OnWindowCreated(CefRefPtr<CefWindow> window) override;
+    void OnWindowDestroyed(CefRefPtr<CefWindow> window) override;
+    bool CanClose(CefRefPtr<CefWindow> window) override;
+    CefSize GetPreferredSize(CefRefPtr<CefView> view) override;
+    CefSize GetMinimumSize(CefRefPtr<CefView> view) override;
 
 private:
     CefRefPtr<CefBrowserView> browserView;

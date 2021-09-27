@@ -5,11 +5,11 @@
 namespace app
 {
 
-CefRefPtr<BrowserApp> BrowserApp::instance = NULL;
+CefRefPtr<BrowserApp> BrowserApp::instance = nullptr;
 
 CefRefPtr<BrowserApp> BrowserApp::sharedHandler()
 {
-    if (instance == NULL)
+    if (instance == nullptr)
     {
         instance = new BrowserApp();
     }
@@ -47,7 +47,7 @@ CefRefPtr<AppClient> BrowserApp::getAppClient()
 {
     if (!clientInstance.get())
     {
-        return NULL;
+        return nullptr;
     }
 
     return clientInstance;
