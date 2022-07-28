@@ -74,8 +74,7 @@ bool AppBinding::onTaskNetworkRequest(CefRefPtr<CefBrowser> browser, CefRefPtr<C
     httpRequest->SetFlags(UR_FLAG_SKIP_CACHE);
 
     // create client and load
-    const app::net::RequestClient::RequestCallback &requestCallback = base::Bind(&AppBinding::onRequestComplete, base::Unretained(this));
-    CefRefPtr<CefURLRequest> urlrequest = frame->CreateURLRequest(httpRequest, new app::net::RequestClient(callback, requestCallback));
+    CefRefPtr<CefURLRequest> urlRequest = frame->CreateURLRequest(httpRequest, new app::net::RequestClient(callback, base::BindOnce(&AppBinding::onRequestComplete, base::Unretained(this))));
 
     return true;
 }

@@ -59,7 +59,7 @@ CefRefPtr<CefResourceRequestHandler> AppClient::GetResourceRequestHandler(CefRef
     return this;
 }
 
-cef_return_value_t AppClient::OnBeforeResourceLoad(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, CefRefPtr<CefRequestCallback> callback)
+cef_return_value_t AppClient::OnBeforeResourceLoad(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, CefRefPtr<CefCallback> callback)
 {
     CEF_REQUIRE_IO_THREAD();
 
@@ -83,7 +83,7 @@ void AppClient::setupResourceManager(CefRefPtr<CefResourceManager> resourceManag
     if (!CefCurrentlyOn(TID_IO))
     {
         // execute on the browser IO thread
-        CefPostTask(TID_IO, base::Bind(setupResourceManager, resourceManager));
+        CefPostTask(TID_IO, base::BindOnce(setupResourceManager, resourceManager));
         return;
     }
 
