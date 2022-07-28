@@ -95,21 +95,9 @@ jobs:
           name: artifact-${{ matrix.config.target }}-${{ matrix.config.cef_platform }}
           path: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg
 
-      - name: Get release
-        id: get_release
-        uses: bruceadams/get-release@v1.2.2
-        if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
       - name: Release
         id: upload-release-asset
-        uses: actions/upload-release-asset@v1
+        uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg
-          asset_name: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg
-          asset_content_type: application/octet-stream
+          files: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg
