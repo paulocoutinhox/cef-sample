@@ -1,9 +1,9 @@
 # CEF Sample
 
-[![Linux](https://github.com/paulo-coutinho/cef-sample/actions/workflows/linux.yml/badge.svg)](https://github.com/paulo-coutinho/cef-sample/actions/workflows/linux.yml)
-[![Windows](https://github.com/paulo-coutinho/cef-sample/actions/workflows/windows.yml/badge.svg)](https://github.com/paulo-coutinho/cef-sample/actions/workflows/windows.yml)
-[![macOS](https://github.com/paulo-coutinho/cef-sample/actions/workflows/macos.yml/badge.svg)](https://github.com/paulo-coutinho/cef-sample/actions/workflows/macos.yml)
-[![Linux ARM](https://github.com/paulo-coutinho/cef-sample/actions/workflows/linux-arm.yml/badge.svg)](https://github.com/paulo-coutinho/cef-sample/actions/workflows/linux-arm.yml)
+[![Linux](https://github.com/paulocoutinhox/cef-sample/actions/workflows/linux.yml/badge.svg)](https://github.com/paulocoutinhox/cef-sample/actions/workflows/linux.yml)
+[![Windows](https://github.com/paulocoutinhox/cef-sample/actions/workflows/windows.yml/badge.svg)](https://github.com/paulocoutinhox/cef-sample/actions/workflows/windows.yml)
+[![macOS](https://github.com/paulocoutinhox/cef-sample/actions/workflows/macos.yml/badge.svg)](https://github.com/paulocoutinhox/cef-sample/actions/workflows/macos.yml)
+[![Linux ARM](https://github.com/paulocoutinhox/cef-sample/actions/workflows/linux-arm.yml/badge.svg)](https://github.com/paulocoutinhox/cef-sample/actions/workflows/linux-arm.yml)
 
 In this sample you can learn about generate desktop applications with: CXX + CEF 3 + Vue 3.
 

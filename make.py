@@ -7,13 +7,13 @@ Make tool
 Usage:
   make.py <task-name>
   make.py [options]
-  make.py -h | --help  
+  make.py -h | --help
 
 Options:
   -h --help                         Show this screen.
   -d --debug                        Enable debug mode.
   --version                         Show version.
-  
+
 Examples:
   python make.py -h
 
@@ -29,7 +29,7 @@ Tasks:
   - build-ninja
   - build-xcode
   - build-linux-arm
-  - build-linux-arm64  
+  - build-linux-arm64
 
   - dmg-build
 

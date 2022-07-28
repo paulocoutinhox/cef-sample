@@ -35,7 +35,7 @@ public:
     // retrieve resource path contents as a std::string or false if the resource is not found
     static bool getResourceString(const std::string &resourcePath, std::string &outData);
 
-    // retrieve resource path contents as a CefStreamReader or returns NULL if the resource is not found
+    // retrieve resource path contents as a CefStreamReader or returns null if the resource is not found
     static CefRefPtr<CefStreamReader> getResourceReader(const std::string &resourcePath);
 
 #if defined(OS_MAC)

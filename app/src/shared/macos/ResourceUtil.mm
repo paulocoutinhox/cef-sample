@@ -29,7 +29,7 @@ bool ResourceUtil::getResourceDir(std::string &dir)
 {
     // retrieve the executable directory
     uint32_t pathSize = 0;
-    _NSGetExecutablePath(NULL, &pathSize);
+    _NSGetExecutablePath(nullptr, &pathSize);
 
     if (pathSize > 0)
     {
