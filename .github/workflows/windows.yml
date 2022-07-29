@@ -12,7 +12,7 @@ jobs:
         config:
           - {
               name: "Windows 32",
-              os: "windows-latest",
+              os: "windows-2019",
               target: "windows",
               cef_platform: "windows32",
               vs_arch: "Win32",
@@ -21,7 +21,7 @@ jobs:
             }
           - {
               name: "Windows 64",
-              os: "windows-latest",
+              os: "windows-2019",
               target: "windows",
               cef_platform: "windows64",
               vs_arch: "x64",
@@ -30,7 +30,7 @@ jobs:
             }
           - {
               name: "Windows ARM 64",
-              os: "windows-latest",
+              os: "windows-2019",
               target: "windows",
               cef_platform: "windowsarm64",
               vs_arch: "ARM64",
@@ -49,16 +49,16 @@ jobs:
           python-version: "3.9"
 
       - name: Upgrade PIP
-        run: python -m pip install --upgrade pip setuptools wheel
+        run: python3 -m pip install --upgrade pip setuptools wheel
 
       - name: Display Python version
-        run: python --version
+        run: python3 --version
 
       - name: Display PIP version
-        run: pip --version
+        run: python3 -m pip --version
 
       - name: Python requirements
-        run: pip install -r requirements.txt
+        run: python3 -m pip install -r requirements.txt
 
       - name: Install CMake
         uses: jwlawson/actions-setup-cmake@v1.8
@@ -72,7 +72,7 @@ jobs:
           cmake --build build --target MyApp --config Release -v
 
       - name: Pack
-        run: python -m zipfile -c ../${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip Release
+        run: python3 -m zipfile -c ../${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip Release
         working-directory: build
 
       - name: Upload
@@ -81,21 +81,9 @@ jobs:
           name: artifact-${{ matrix.config.target }}-${{ matrix.config.cef_platform }}
           path: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip
 
-      - name: Get release
-        id: get_release
-        uses: bruceadams/get-release@v1.2.2
-        if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
       - name: Release
         id: upload-release-asset
-        uses: actions/upload-release-asset@v1
+        uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip
-          asset_name: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip
-          asset_content_type: application/zip
+          files: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip

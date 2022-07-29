@@ -12,7 +12,7 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 4
 
-[Makefile]
+[{*[Mm]akefile*,*.mak,*.mk,depend}]
 indent_style = tab
 
 [*.{bat, cmd, cmd.*}]
@@ -20,10 +20,19 @@ end_of_line = crlf
 indent_style = space
 indent_size = 4
 
-[.travis.yml]
+[*.yml]
 indent_style = space
 indent_size = 2
 
 [*.md]
 indent_size = 4
 trim_trailing_whitespace = false
+
+[*.gemspec]
+indent_size = 2
+
+[*.rb]
+indent_size = 2
+
+[*.bat]
+end_of_line = crlf

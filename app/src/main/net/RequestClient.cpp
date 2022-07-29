@@ -7,12 +7,12 @@ namespace app
 namespace net
 {
 
-RequestClient::RequestClient(CefRefPtr<CefMessageRouterBrowserSide::Callback> browserCallback, const RequestCallback &requestCallback)
+RequestClient::RequestClient(CefRefPtr<CefMessageRouterBrowserSide::Callback> browserCallback, RequestCallback requestCallback)
 {
     CEF_REQUIRE_UI_THREAD();
 
     this->browserCallback = browserCallback;
-    this->requestCallback = requestCallback;
+    this->requestCallback = std::move(requestCallback);
 
     DCHECK(this->browserCallback);
     DCHECK(!this->requestCallback.is_null());
@@ -47,10 +47,10 @@ void RequestClient::OnRequestComplete(CefRefPtr<CefURLRequest> request)
 
     CEF_REQUIRE_UI_THREAD();
 
-    if (!this->requestCallback.is_null())
+    if (!requestCallback.is_null())
     {
-        this->requestCallback.Run(browserCallback, errorCode, downloadData);
-        this->requestCallback.Reset();
+        std::move(requestCallback).Run(browserCallback, errorCode, downloadData);
+        std::move(requestCallback).Reset();
     }
 }
 

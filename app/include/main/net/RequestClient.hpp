@@ -20,9 +20,10 @@ class RequestClient : public CefURLRequestClient
 {
 
 public:
-    typedef base::Callback<void(CefRefPtr<CefMessageRouterBrowserSide::Callback> /* browserCallback */, CefURLRequest::ErrorCode /*errorCode*/, const std::string & /*downloadData*/)> RequestCallback;
+    using RequestCallback = base::OnceCallback<void(CefRefPtr<CefMessageRouterBrowserSide::Callback> /* browserCallback */, CefURLRequest::ErrorCode /*errorCode*/, const std::string & /*downloadData*/)>;
 
-    RequestClient(CefRefPtr<CefMessageRouterBrowserSide::Callback> browserCallback, const RequestCallback &requestCallback);
+    RequestClient(CefRefPtr<CefMessageRouterBrowserSide::Callback> browserCallback, RequestCallback requestCallback);
+
     virtual ~RequestClient();
 
     void OnRequestComplete(CefRefPtr<CefURLRequest> request) override;
