@@ -36,16 +36,16 @@ jobs:
           python-version: "3.9"
 
       - name: Upgrade PIP
-        run: python -m pip install --upgrade pip setuptools wheel
+        run: python3 -m pip install --upgrade pip setuptools wheel
 
       - name: Display Python version
-        run: python --version
+        run: python3 --version
 
       - name: Display PIP version
-        run: pip --version
+        run: python3 -m pip --version
 
       - name: Python requirements
-        run: pip install -r requirements.txt
+        run: python3 -m pip install -r requirements.txt
 
       - name: Install CMake
         uses: jwlawson/actions-setup-cmake@v1.8
@@ -84,7 +84,7 @@ jobs:
         env:
           NOTARIZATION_USERNAME: ${{ secrets.NOTARIZATION_USERNAME }}
           NOTARIZATION_PASSWORD: ${{ secrets.NOTARIZATION_PASSWORD }}
-        run: python notarize.py --dmg ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg --bundle-id "com.paulocoutinho.example" --user $NOTARIZATION_USERNAME --passwd $NOTARIZATION_PASSWORD --asc-provider 54BDV6YZ73
+        run: python3 notarize.py --dmg ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg --bundle-id "com.paulocoutinho.example" --user $NOTARIZATION_USERNAME --passwd $NOTARIZATION_PASSWORD --asc-provider 54BDV6YZ73
 
       - name: Staple build
         run: xcrun stapler staple ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg

@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt-get update && apt-get install -y -q            \
         autoconf                                       \
@@ -16,17 +16,17 @@ RUN apt-get update && apt-get install -y -q            \
         libx11-dev                                     \
         libgtk2.0-dev                                  \
         libgtkglext1-dev                               \
-        nano                                           \ 
+        nano                                           \
         python3                                        \
         python3-pip                                    \
         ninja-build                                    \
-        cmake                                          \        
-        libnss3                                        \        
-        libnspr4                                       \        
-        libxss1                                        \        
-        libatk-bridge2.0-0                             \        
-        libxkbcommon-x11-0                             \        
-        libgtk-3-0                                     \        
-        libgtk-3-dev                                   \        
-        libasound2                                     \        
+        cmake                                          \
+        libnss3                                        \
+        libnspr4                                       \
+        libxss1                                        \
+        libatk-bridge2.0-0                             \
+        libxkbcommon-x11-0                             \
+        libgtk-3-0                                     \
+        libgtk-3-dev                                   \
+        libasound2                                     \
   && apt-get clean

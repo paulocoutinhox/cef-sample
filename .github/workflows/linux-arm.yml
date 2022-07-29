@@ -21,16 +21,16 @@ jobs:
           python-version: "3.9"
 
       - name: Upgrade PIP
-        run: python -m pip install --upgrade pip setuptools wheel
+        run: python3 -m pip install --upgrade pip setuptools wheel
 
       - name: Display Python version
-        run: python --version
+        run: python3 --version
 
       - name: Display PIP version
-        run: pip --version
+        run: python3 -m pip --version
 
       - name: Python requirements
-        run: pip install -r requirements.txt
+        run: python3 -m pip install -r requirements.txt
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -39,10 +39,10 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build
-        run: python make.py build-${{ matrix.config.target }}
+        run: python3 make.py build-${{ matrix.config.target }}
 
       - name: Pack
-        run: python -m tarfile -c ../${{ matrix.config.target }}.tar.gz Release
+        run: python3 -m tarfile -c ../${{ matrix.config.target }}.tar.gz Release
         working-directory: build
 
       - name: Upload
