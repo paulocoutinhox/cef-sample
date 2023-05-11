@@ -1,6 +1,11 @@
 name: Linux
 
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'extras/images/**'
 
 jobs:
   build:
@@ -42,7 +47,7 @@ jobs:
       - name: Install CMake
         uses: jwlawson/actions-setup-cmake@v1.8
         with:
-          cmake-version: "3.20.0"
+          cmake-version: "3.24.0"
 
       - name: Build
         run: |

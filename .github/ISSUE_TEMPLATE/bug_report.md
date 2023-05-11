@@ -26,7 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **System (please complete the following information):**
  - OS: [e.g. Ubuntu]
  - Version [e.g. 18.04]
- - CMake [e.g. 3.20]
+ - CMake [e.g. 3.24]
  - Compiler [e.g. clang 12]
  
 **Additional context**

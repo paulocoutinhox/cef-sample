@@ -31,7 +31,7 @@ function(DownloadCEF platform version download_dir)
         DOWNLOAD "${CEF_DOWNLOAD_URL_ESCAPED}" "${CEF_DOWNLOAD_PATH}"
         EXPECTED_HASH SHA1=${CEF_SHA1}
         SHOW_PROGRESS
-        )
+      )
     endif()
 
     # extract the binary distribution
@@ -39,6 +39,6 @@ function(DownloadCEF platform version download_dir)
     execute_process(
       COMMAND ${CMAKE_COMMAND} -E tar xzf "${CEF_DOWNLOAD_DIR}/${CEF_DOWNLOAD_FILENAME}"
       WORKING_DIRECTORY ${CEF_DOWNLOAD_DIR}
-      )
+    )
   endif()
 endfunction()

@@ -16,7 +16,7 @@ CEF is Chromium Embedded Framework (https://bitbucket.org/chromiumembedded/) and
 ## Screenshots
 
 <p align="center">
-    <img src="extras/screenshots/app.png?rnd=2021-06-29" alt="screenshot" style="max-width: 400px">
+    <img src="extras/images/app.png?rnd=2021-06-29" alt="screenshot" style="max-width: 400px">
 </p>
 
 ## Download
@@ -27,7 +27,7 @@ You can download a compiled version for your system on releases page or actions 
 
 You can change CEF_VERSION variable inside CMakeLists.txt.
 
-Example of valid version: `94.4.1+g4b61a8c+chromium-94.0.4606.54`.
+Example of valid version: `111.2.7+gebf5d6a+chromium-111.0.5563.148`.
 
 Visit https://cef-builds.spotifycdn.com/index.html for the list of supported platforms and versions.
 
