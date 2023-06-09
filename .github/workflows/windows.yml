@@ -17,7 +17,7 @@ jobs:
         config:
           - {
               name: "Windows 32",
-              os: "windows-2019",
+              os: "windows-2022",
               target: "windows",
               cef_platform: "windows32",
               vs_arch: "Win32",
@@ -26,7 +26,7 @@ jobs:
             }
           - {
               name: "Windows 64",
-              os: "windows-2019",
+              os: "windows-2022",
               target: "windows",
               cef_platform: "windows64",
               vs_arch: "x64",
@@ -35,7 +35,7 @@ jobs:
             }
           - {
               name: "Windows ARM 64",
-              os: "windows-2019",
+              os: "windows-2022",
               target: "windows",
               cef_platform: "windowsarm64",
               vs_arch: "ARM64",
