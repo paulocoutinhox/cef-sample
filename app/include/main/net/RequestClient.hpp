@@ -27,8 +27,8 @@ public:
     virtual ~RequestClient();
 
     void OnRequestComplete(CefRefPtr<CefURLRequest> request) override;
-    void OnUploadProgress(CefRefPtr<CefURLRequest> request, int64 current, int64 total) override;
-    void OnDownloadProgress(CefRefPtr<CefURLRequest> request, int64 current, int64 total) override;
+    void OnUploadProgress(CefRefPtr<CefURLRequest> request, int64_t current, int64_t total) override;
+    void OnDownloadProgress(CefRefPtr<CefURLRequest> request, int64_t current, int64_t total) override;
     void OnDownloadData(CefRefPtr<CefURLRequest> request, const void *data, size_t dataLength) override;
     bool GetAuthCredentials(bool isProxy, const CefString &host, int port, const CefString &realm, const CefString &scheme, CefRefPtr<CefAuthCallback> callback) override;
 
@@ -36,8 +36,8 @@ public:
     const std::string &getDownloadData();
 
 private:
-    int64 uploadTotal;
-    int64 downloadTotal;
+    int64_t uploadTotal;
+    int64_t downloadTotal;
     std::string downloadData;
 
     RequestCallback requestCallback;
