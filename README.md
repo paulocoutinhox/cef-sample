@@ -27,7 +27,7 @@ You can download a compiled version for your system on releases page or actions 
 
 You can change CEF_VERSION variable inside CMakeLists.txt.
 
-Example of valid version: `114.2.10+g398e3c3+chromium-114.0.5735.110`.
+Example of valid version: `120.2.7+g4bc6a59+chromium-120.0.6099.234`.
 
 Visit https://cef-builds.spotifycdn.com/index.html for the list of supported platforms and versions.
 
@@ -83,3 +83,11 @@ Other option is publish your application on Microsoft Store. See some tutorials:
 * https://docs.microsoft.com/windows/msix/packaging-tool/create-an-msix-overview
 * https://docs.microsoft.com/windows/win32/win_cert/windows-certification-portal
 * https://www.electronjs.org/docs/tutorial/windows-store-guide
+
+## License
+
+This license informations is about this personal project, not the CEF Library.
+
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2021-2024, Paulo Coutinho

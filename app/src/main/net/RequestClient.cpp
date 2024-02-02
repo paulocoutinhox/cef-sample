@@ -54,12 +54,12 @@ void RequestClient::OnRequestComplete(CefRefPtr<CefURLRequest> request)
     }
 }
 
-void RequestClient::OnUploadProgress(CefRefPtr<CefURLRequest> request, int64 current, int64 total)
+void RequestClient::OnUploadProgress(CefRefPtr<CefURLRequest> request, int64_t current, int64_t total)
 {
     uploadTotal = total;
 }
 
-void RequestClient::OnDownloadProgress(CefRefPtr<CefURLRequest> request, int64 current, int64 total)
+void RequestClient::OnDownloadProgress(CefRefPtr<CefURLRequest> request, int64_t current, int64_t total)
 {
     downloadTotal = total;
 }

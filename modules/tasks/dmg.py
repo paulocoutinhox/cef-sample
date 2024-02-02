@@ -1,4 +1,3 @@
-import os
 import subprocess
 
 import modules.file as file
@@ -15,10 +14,6 @@ def run_task_build():
             "create-dmg",
             "--volname",
             config.app_name,
-            "--icon",
-            "build/{0}/{1}.app".format(config.build_type, config.app_name),
-            "--hide-extension",
-            "build/{0}/{1}.app".format(config.build_type, config.app_name),
             "--hdiutil-quiet",
             "{0}.dmg".format(config.app_name),
             "build/{0}/{1}.app".format(config.build_type, config.app_name),
