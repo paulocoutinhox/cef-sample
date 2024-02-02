@@ -9,7 +9,7 @@ project("MyApp")
 
 # CEF configuration
 set_property(GLOBAL PROPERTY OS_FOLDERS ON)
-set(CEF_VERSION "114.2.10+g398e3c3+chromium-114.0.5735.110")
+set(CEF_VERSION "121.3.3+gc6b2e4d+chromium-121.0.6167.86")
 
 # Determine the platform
 if(NOT DEFINED CEF_PLATFORM)
