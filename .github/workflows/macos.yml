@@ -63,27 +63,28 @@ jobs:
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCEF_PLATFORM=${{ matrix.config.cef_platform }} -DCMAKE_OSX_ARCHITECTURES=${{ matrix.config.osx_arch }} -DPROJECT_ARCH=${{ matrix.config.project_arch }} -G "Xcode"
           cmake --build build --target MyApp --config Release -v
 
-      - name: "Import certificate"
-        uses: devbotsxyz/import-signing-certificate@main
+      - name: Install application certificate
+        uses: apple-actions/import-codesign-certs@v2
         with:
-          certificate-data: ${{ secrets.MACOS_CERTIFICATE }}
-          certificate-passphrase: ${{ secrets.MACOS_CERTIFICATE_PWD }}
-          keychain-password: ${{ secrets.KEYCHAIN_PWD }}
+          keychain: ${{ github.run_id }}
+          keychain-password: ${{ github.run_id }}
+          p12-file-base64: ${{ secrets.MACOS_CERTIFICATE }}
+          p12-password: ${{ secrets.MACOS_CERTIFICATE_PWD }}
 
       - name: Codesign application
         run: |
           security find-identity -v
-          python codesign.py "Developer ID Application: Paulo Coutinho (99AHAA343Q)" "build/Release/MyApp.app" "app/resources/macos/entitlements.plist" -v
+          python3 codesign.py "Developer ID Application: Paulo Coutinho (99AHAA343Q)" "build/Release/MyApp.app" "app/resources/macos/entitlements.plist" -v
 
       - name: Create DMG
         run: |
-          python make.py dmg-build
+          python3 make.py dmg-build
           mv "MyApp.dmg" ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg
 
       - name: Codesign DMG
         run: |
           security find-identity -v
-          python codesign.py "Developer ID Application: Paulo Coutinho (99AHAA343Q)" "${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg" "app/resources/macos/entitlements.plist" -v
+          python3 codesign.py "Developer ID Application: Paulo Coutinho (99AHAA343Q)" "${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg" "app/resources/macos/entitlements.plist" -v
 
       - name: Notarize build
         env:
