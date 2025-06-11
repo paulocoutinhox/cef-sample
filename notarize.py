@@ -78,11 +78,14 @@ async def requestNotarization(args):
     data = await requestCmd(args, cmd)
 
     # notarytool with --wait will block until completion, so we don't need to poll
-    if "Successfully received submission info" in data and "Accepted" in data:
+    if "status: Accepted" in data and "Processing complete" in data:
         log.info("Notarization succeeded for: %s", args.dmg)
+        log.info("%s", data)
         return "success"
+    elif "status: Invalid" in data or "status: Rejected" in data:
+        raise NotarizationError("Notarization failed:\n\n{0}".format(data))
     else:
-        raise NotarizationError("Failed to notarize app:\n\n{0}".format(data))
+        raise NotarizationError("Unexpected notarization result:\n\n{0}".format(data))
 
 
 async def pollNotarizationCompleted(args, result):
