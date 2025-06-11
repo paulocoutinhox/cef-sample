@@ -1,9 +1,9 @@
-import sys
-import time
 import argparse
 import asyncio
-import subprocess
 import logging
+import subprocess
+import sys
+import time
 from shutil import which
 from time import gmtime, strftime
 
@@ -61,70 +61,34 @@ async def requestNotarization(args):
     # long lasting command, it uploads the binary to Apple server
     cmd = [
         "xcrun",
-        "altool",
-        "-u",
+        "notarytool",
+        "submit",
+        args.dmg,
+        "--apple-id",
         args.user,
-        "-p",
+        "--password",
         args.passwd,
-        "--notarize-app",
-        "-t",
-        "osx",
     ]
 
     if args.asc_provider:
-        cmd += ["--asc-provider", args.asc_provider]
+        cmd += ["--team-id", args.asc_provider]
 
-    cmd += ["--primary-bundle-id", args.bundle_id, "-f", args.dmg]
+    cmd += ["--wait"]
 
     data = await requestCmd(args, cmd)
-    requestUUID = parseValueFromData("RequestUUID", data)
-    if not requestUUID:
+
+    # notarytool with --wait will block until completion, so we don't need to poll
+    if "Successfully received submission info" in data and "Accepted" in data:
+        log.info("Notarization succeeded for: %s", args.dmg)
+        return "success"
+    else:
         raise NotarizationError("Failed to notarize app:\n\n{0}".format(data))
-    return requestUUID.split("=")[-1].strip()
 
 
-async def pollNotarizationCompleted(args, uuid):
-    cmd = [
-        "xcrun",
-        "altool",
-        "-u",
-        args.user,
-        "-p",
-        args.passwd,
-        "--notarization-info",
-        uuid,
-    ]
-
-    if args.asc_provider:
-        cmd += ["--asc-provider", args.asc_provider]
-
-    attempts = 180
-    pollInterval = 60  # attempts * pollInterval = 3h
-    while attempts:
-        data = await requestCmd(args, cmd)
-        statusCode = parseValueFromData("Status Code:", data)
-
-        if statusCode == "0":
-            log.info("Notarization succeeded for: %s", args.dmg)
-            log.info("%s", data)
-            return True
-        elif statusCode == "2":
-            log.info("Notarization failed for: %s", args.dmg)
-            raise NotarizationError("Notarization failed:\n\n{0}".format(data))
-        else:
-            log.info("Notarization not ready yet for: %s", args.dmg)
-            log.info("%s", data)
-
-        attempts -= 1
-        log.info(
-            "Sleeping %is before next poll attempt (attempts left: %i)",
-            pollInterval,
-            attempts,
-        )
-        await asyncio.sleep(pollInterval)
-
-    log.warning("Notarization poll timeout..")
-    return False
+async def pollNotarizationCompleted(args, result):
+    # With notarytool --wait, polling is no longer needed
+    # The result from requestNotarization already indicates success or failure
+    return result == "success"
 
 
 async def embedNotarization(args):
@@ -153,8 +117,8 @@ async def embedNotarization(args):
 
 
 async def main(args):
-    uuid = await requestNotarization(args)
-    if not await pollNotarizationCompleted(args, uuid):
+    result = await requestNotarization(args)
+    if not await pollNotarizationCompleted(args, result):
         raise NotarizationError("Notarization failed for: {0}".format(args.dmg))
     await embedNotarization(args)
 
