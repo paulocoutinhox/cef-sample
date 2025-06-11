@@ -16,16 +16,18 @@ bool ResourceUtil::getResourceDir(std::string &dir)
 {
     char result[PATH_MAX];
     ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
-    const char *path;
 
     if (count != -1)
     {
-        path = dirname(result);
+        result[count] = '\0';
+        const char *path = dirname(result);
+        dir = std::string(path) + "/" + ASSETS_PATH;
+        return true;
     }
-
-    dir = std::string(path) + "/" + ASSETS_PATH;
-
-    return true;
+    else
+    {
+        return false;
+    }
 }
 
 } // namespace util
