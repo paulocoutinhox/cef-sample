@@ -43,7 +43,7 @@ jobs:
               project_arch: "arm64",
             }
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: ${{ matrix.config.msvc_arch }}
@@ -51,7 +51,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: "3.10"
 
       - name: Upgrade PIP
         run: python3 -m pip install --upgrade pip setuptools wheel
@@ -66,7 +66,7 @@ jobs:
         run: python3 -m pip install -r requirements.txt
 
       - name: Install CMake
-        uses: jwlawson/actions-setup-cmake@v1.8
+        uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: "3.24.0"
 
@@ -81,14 +81,14 @@ jobs:
         working-directory: build
 
       - name: Upload
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: artifact-${{ matrix.config.target }}-${{ matrix.config.cef_platform }}
           path: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip
 
       - name: Release
         id: upload-release-asset
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.zip

@@ -30,7 +30,7 @@ jobs:
               project_arch: "arm64",
             }
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Dependencies
         run: brew install create-dmg
@@ -38,7 +38,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: "3.10"
 
       - name: Upgrade PIP
         run: python3 -m pip install --upgrade pip setuptools wheel
@@ -53,7 +53,7 @@ jobs:
         run: python3 -m pip install -r requirements.txt
 
       - name: Install CMake
-        uses: jwlawson/actions-setup-cmake@v1.8
+        uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: "3.24.0"
 
@@ -92,18 +92,15 @@ jobs:
           NOTARIZATION_PASSWORD: ${{ secrets.NOTARIZATION_PASSWORD }}
         run: python3 notarize.py --dmg ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg --bundle-id "com.paulocoutinho.example" --user $NOTARIZATION_USERNAME --passwd $NOTARIZATION_PASSWORD --asc-provider 54BDV6YZ73
 
-      - name: Staple build
-        run: xcrun stapler staple ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg
-
       - name: Upload
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: artifact-${{ matrix.config.target }}-${{ matrix.config.cef_platform }}
           path: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg
 
       - name: Release
         id: upload-release-asset
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: ${{ matrix.config.target }}-${{ matrix.config.cef_platform }}.dmg

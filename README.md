@@ -90,4 +90,4 @@ This license informations is about this personal project, not the CEF Library.
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2021-2024, Paulo Coutinho
+Copyright (c) 2021-2025, Paulo Coutinho
