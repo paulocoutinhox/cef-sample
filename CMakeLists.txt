@@ -9,7 +9,7 @@ project("MyApp")
 
 # CEF configuration
 set_property(GLOBAL PROPERTY OS_FOLDERS ON)
-set(CEF_VERSION "137.0.10+g7e14fe1+chromium-137.0.7151.69" CACHE STRING "CEF Version to Download")
+set(CEF_VERSION "138.0.48+g8bf7dad+chromium-138.0.7204.255" CACHE STRING "CEF Version to Download")
 message(STATUS "CEF Version: ${CEF_VERSION}")
 message(STATUS "CEF Platform: ${CEF_PLATFORM}")
 message(STATUS "System Name: ${CMAKE_SYSTEM_NAME}")
