@@ -22,7 +22,7 @@ jobs:
               cef_platform: "linux64",
             }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: System dependencies
         run: sudo apt-get install build-essential libgtk2.0-dev libgtkglext1-dev

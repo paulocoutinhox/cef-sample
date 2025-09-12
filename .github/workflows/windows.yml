@@ -43,7 +43,7 @@ jobs:
               project_arch: "arm64",
             }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: ${{ matrix.config.msvc_arch }}

@@ -30,7 +30,7 @@ jobs:
               project_arch: "arm64",
             }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Dependencies
         run: brew install create-dmg

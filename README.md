@@ -27,7 +27,7 @@ You can download a compiled version for your system on releases page or actions 
 
 You can change CEF_VERSION variable inside CMakeLists.txt.
 
-Example of valid version: `139.0.40+g465474a+chromium-139.0.7258.139`.
+Example of valid version: `138.0.48+g8bf7dad+chromium-138.0.7204.255`.
 
 Visit https://cef-builds.spotifycdn.com/index.html for the list of supported platforms and versions.
 
