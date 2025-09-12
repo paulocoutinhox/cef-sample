@@ -44,6 +44,9 @@ void BrowserUtil::create(CefRefPtr<CefClient> client, const CefString &startupUR
         windowInfo.SetAsPopup(nullptr, APP_NAME);
 #endif
 
+        // alloy style will create a basic native window and chrome style will create a fully styled chrome ui window
+        windowInfo.runtime_style = CEF_RUNTIME_STYLE_ALLOY;
+
         // create the browser window
         CefBrowserHost::CreateBrowser(windowInfo, client, startupURL, settings, nullptr, nullptr);
     }
